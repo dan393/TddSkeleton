@@ -5,33 +5,27 @@ import java.util.List;
 
 public class RecentlyUsedList {
 
-    List<String> list = new ArrayList<>();
+    private final List<String> list = new ArrayList<>();
 
     public boolean isEmpty() {
-
         return list.isEmpty();
 
     }
 
     public void add(String item) {
-        list.toString();
-        for (String element : list) {
-            if(element == item) {
-                list.remove(item);
-            }
+        if(item == null) {
+            throw new IllegalArgumentException("Null values are not allowed!");
         }
 
+        if (list.contains(item)) {
+            list.remove(item);
+        }
 
         list.add(0, item);
     }
 
-    public boolean contains(String item) {
-        for (String element : list) {
-            if(element == item) {
-                return true;
-            }
-        }
-        return false;
+    public boolean contains (String item) {
+        return list.contains(item);
     }
 
     public String get(int i) {

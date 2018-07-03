@@ -1,11 +1,12 @@
 package com.develogical;
 
 import org.junit.Test;
-
 import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 
 public class RecentlyUsedListTest {
-
 
 	@Test
 	public void listIsEmptyWhenInitialized() {
@@ -27,7 +28,10 @@ public class RecentlyUsedListTest {
 
         String testItem = "testElement";
         testList.add(testItem);
+        assertThat(testList.get(0), equalTo(testItem));
         assertTrue(testList.get(0).equals(testItem));
+//        assertTrue(testList.isEmpty() == false);
+//        assertTrue(testList.getMostRecentItem().equals(testItem));
     }
 
     @Test
@@ -40,6 +44,18 @@ public class RecentlyUsedListTest {
         testList.add(testItem2);
 
         assertTrue(testList.get(0).equals(testItem2));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void throwExceptionIfNull() {
+        RecentlyUsedList testList = new RecentlyUsedList();
+        testList.add(null);
+    }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void indexOutOfBoundIfIndexOutOfBound(){
+        RecentlyUsedList testList = new RecentlyUsedList();
+        testList.get(0);
     }
 
     @Test
@@ -57,7 +73,6 @@ public class RecentlyUsedListTest {
         testList.add(testItem2);
 
         assertTrue(testList.get(0).equals(testItem2));
-
         assertTrue(testList.size() == 4);
     }
 
